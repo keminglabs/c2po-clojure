@@ -1,5 +1,5 @@
 (ns c2po.data-readers
-  (:use [c2po.literals :only [c2po-literal-prefix]])
+  (:use [c2po.literals :only [c2po-literal-prefix tag-ns-sep]])
   (:require c2po.records))
 
 (defn record-x [x m]
@@ -8,8 +8,8 @@
 (defn data-reader-for [type x prefix-type]
   (let [tag (case prefix-type
               :none (str x)
-              :type (str type "." x)
-              :full (str c2po-literal-prefix "." type "." x))]
+              :type (str type tag-ns-sep x)
+              :full (str c2po-literal-prefix tag-ns-sep type tag-ns-sep x))]
     {(symbol tag) (partial record-x x)}))
 
 (def recs [["geom" c2po.records/geom]
