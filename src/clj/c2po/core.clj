@@ -34,7 +34,8 @@
 
      (if-not (valid-spec? spec)
        (throw (Error. "C2PO plot spec should be a map with, at minimum, :mapping, :data, and :geom keys."))
-       (client/post url {:multipart [{:name "c2po" :content (pr-str spec)}]}))))
+       (client/post url {:multipart [{:name "c2po" :content (pr-str spec)}]
+                         :throw-entire-message? true}))))
 
 (defn set-data-readers!
   ([]
