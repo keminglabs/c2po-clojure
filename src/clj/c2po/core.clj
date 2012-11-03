@@ -52,11 +52,14 @@
 (comment
   (def url "http://localhost:5000")
   (set-data-readers! :unprefixed)
-  (def scatterplot {:data (repeatedly 2 #(hash-map :a (rand) :b (rand)))
-                    :mapping {:x :a :y :b}
-                    :geom #point {:opacity 0.5}})
+  ;; (def scatterplot {:data (repeatedly 2 #(hash-map :a (rand) :b (rand)))
+  ;;                   :mapping {:x :a :y :b}
+  ;;                   :geom #point {:opacity 0.5}})
 
   (prn scatterplot)
   (c2po scatterplot "http://localhost:5000")
+  (c2po scatterplot)
+
+  
 
   )
