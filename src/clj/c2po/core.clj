@@ -1,7 +1,5 @@
 (ns c2po.core
-  (:require c2po.data-readers
-            clojure.string
-            [clj-http.client :as client]))
+  (:require [clj-http.client :as client]))
 
 (def url "C2PO free compiler URL"
   "http://c2po.keminglabs.com")
@@ -37,21 +35,9 @@
        (:body (client/post url {:multipart [{:name "c2po" :content (pr-str spec)}]
                                 :throw-entire-message? true})))))
 
-(defn set-data-readers!
-  ([]
-     (set-data-readers! :unprefixed))
-  ([type]
-     (let [readers (case type
-                     :unprefixed c2po.data-readers/unprefixed
-                     :type-prefixed c2po.data-readers/type-prefixed
-                     :full-prefixed c2po.data-readers/full-prefixed
-                     (Error. "Available literal types are :unprefixed, :type-prefixed, and :full-prefixed."))]
-       (set! *data-readers* readers)
-       (println (str "Available literals are: " (clojure.string/join " " (sort (keys readers))))))))
-
 (comment
   (def url "http://localhost:5000")
-  (set-data-readers! :unprefixed)
+
   ;; (def scatterplot {:data (repeatedly 2 #(hash-map :a (rand) :b (rand)))
   ;;                   :mapping {:x :a :y :b}
   ;;                   :geom #point {:opacity 0.5}})
