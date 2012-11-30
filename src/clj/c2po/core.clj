@@ -1,5 +1,6 @@
 (ns c2po.core
-  (:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client]
+            [clojure.set :as set]))
 
 (def url "C2PO free compiler URL"
   "http://c2po.keminglabs.com")
@@ -21,7 +22,7 @@
 
 (defn valid-spec? [m]
   (and (map? m)
-       (every? #{:mapping :data :geom} (keys m))))
+       (set/subset? #{:mapping :data :geom} (set (keys m)))))
 
 (defn c2po
   ([spec] (c2po spec url))
