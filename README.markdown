@@ -6,21 +6,25 @@ This Clojure package uses the free online C2PO compiler and is limited to 1 MB o
 Plot specifications are compiled directly to an SVG string, which is returned:
 
 ```clojure
-(use '[c2po.core :only [c2po set-data-readers!]])
-
-;;Set local unprefixed data readers so you can say things like #point {}
-(set-data-readers! :unprefixed)
+(require '[c2po.core :refer [c2po]]
+         '[c2po.geom :as geom])
 
 (def scatterplot {:data (repeatedly 20 #(hash-map :this (rand) :that (rand)))
                   :mapping {:x :this :y :that}
-                  :geom #point {:opacity 0.5}})
+                  :geom (geom/point :opacity 0.5)})
 
 ;;The C2PO server returns an SVG string with embedded CSS.
-;;The easiest way to view it is to save it to disk and open in a browser:
+;;You can view it by saving it to disk and opening in a browser:
 (spit "rad_scatterplot.svg" (c2po scatterplot))
 
-;;(Auto-reload + built-in server coming soon)
+;;Alternatively, you can use the built-in livereload web server:
+(require '[c2po.livereload-server :refer [render!]])
+(render! scatterplot)
+;;which puts your plot at http://localhost:8987
+;;Additional calls to `render!` will automatically refresh the browser.
 ```
+
+See `examples/1-usage.clj` for a more detailed tutorial.
 
 This is an *experimental* package; the package API, plot specification syntax, and remote server may change or disappear at any time.
 
