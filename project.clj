@@ -8,6 +8,7 @@
                                   [compojure "1.1.3" :exclusions [org.clojure/tools.macro]]
                                   [aleph "0.3.0-beta8" :exclusions [cheshire]]
                                   [hiccup "1.0.2"]
+                                  [org.clojure/data.json "0.2.0"]
 
                                   ;;Vomnibus is a collection of sample data sets
                                   [com.keminglabs/vomnibus "0.3.2"]]}}

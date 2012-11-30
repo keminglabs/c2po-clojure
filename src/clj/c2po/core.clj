@@ -1,6 +1,8 @@
 (ns c2po.core
-  (:require [clj-http.client :as client]
-            [clojure.set :as set]))
+  (:require c2po.records
+            [clj-http.client :as client]
+            [clojure.set :as set]
+            [clojure.data.json :as json]))
 
 (def ^:dynamic *url* "C2PO compiler URL"
   "http://c2po.keminglabs.com")
@@ -27,6 +29,13 @@
   (and (map? m)
        (set/subset? #{:mapping :data :geom} (set (keys m)))))
 
+(defn spec->json [spec]
+  (json/write-str spec
+                  :value-fn (fn [_ v]
+                              (if (satisfies? c2po.records/PlainMappable v)
+                                (c2po.records/to-map v)
+                                v))))
+
 (defn c2po
   ([spec] (c2po spec *url*))
   ([spec url]
@@ -36,5 +45,5 @@
 
      (if-not (valid-spec? spec)
        (throw (Error. "C2PO plot spec should be a map with, at minimum, :mapping, :data, and :geom keys."))
-       (:body (client/post url {:multipart [{:name "c2po" :content (pr-str spec)}]
+       (:body (client/post url {:multipart [{:name "c2po" :content (spec->json spec)}]
                                 :throw-entire-message? true})))))
