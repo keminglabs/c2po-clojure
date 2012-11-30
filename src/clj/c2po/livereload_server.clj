@@ -9,10 +9,10 @@
             [cheshire.core :refer [generate-string parse-string]]))
 
 
-(def !server (atom nil))
-(def !opts (atom {:port 8987}))
-(def !current-plot (atom [:h1 "Ready"]))
-(def broadcast-channel (permanent-channel))
+(defonce !server (atom nil))
+(defonce !opts (atom {:port 8987}))
+(defonce !current-plot (atom [:h1 "Ready"]))
+(defonce broadcast-channel (permanent-channel))
 
 ;;Messages to livereload client.
 ;;http://help.livereload.com/kb/ecosystem/livereload-protocol

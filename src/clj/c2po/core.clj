@@ -1,8 +1,9 @@
 (ns c2po.core
   (:require [clj-http.client :as client]
-            [clojure.set :as set]))
+            [clojure.set :as set]
+            [slingshot.slingshot :refer [try+]]))
 
-(def ^:dynamic *url* "C2PO compiler URL"
+(defonce ^:dynamic *url*
   "http://c2po.keminglabs.com")
 
 (defn set-compiler-url! [url]
@@ -36,5 +37,8 @@
 
      (if-not (valid-spec? spec)
        (throw (Error. "C2PO plot spec should be a map with, at minimum, :mapping, :data, and :geom keys."))
-       (:body (client/post url {:multipart [{:name "c2po" :content (pr-str spec)}]
-                                :throw-entire-message? true})))))
+       (try+
+        (:body (client/post url {:multipart [{:name "c2po" :content (pr-str spec)}]
+                                 :throw-entire-message? true}))
+        (catch (contains? % :body) {body :body}
+          (throw (Error. body)))))))

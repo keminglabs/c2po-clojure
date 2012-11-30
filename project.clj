@@ -1,7 +1,8 @@
 (defproject com.keminglabs/c2po "0.1.0-SNAPSHOT"
   :description "Free-to-use client for the C2PO grammar of graphics"
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [clj-http "0.5.6"]]
+                 [clj-http "0.5.8"]
+                 [slingshot "0.10.3"]]
   
   :profiles {:dev {:dependencies [
                                   ;;Bits for the livereload server
