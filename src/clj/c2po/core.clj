@@ -2,8 +2,11 @@
   (:require [clj-http.client :as client]
             [clojure.set :as set]))
 
-(def url "C2PO free compiler URL"
+(def ^:dynamic *url* "C2PO compiler URL"
   "http://c2po.keminglabs.com")
+
+(defn set-compiler-url! [url]
+  (def ^:dynamic *url* url))
 
 
 (defn motd
@@ -25,7 +28,7 @@
        (set/subset? #{:mapping :data :geom} (set (keys m)))))
 
 (defn c2po
-  ([spec] (c2po spec url))
+  ([spec] (c2po spec *url*))
   ([spec url]
 
      ;;Print MOTD on first call to c2po fn.
