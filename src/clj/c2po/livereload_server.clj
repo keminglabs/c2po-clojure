@@ -2,6 +2,7 @@
   (:require [c2po.core :as core]
             [clojure.java.io :as io]
             [compojure.core :refer [defroutes GET]]
+            [compojure.route :as route]
             [aleph.http :refer [wrap-ring-handler wrap-aleph-handler
                                 start-http-server]]
             [lamina.core :refer [enqueue permanent-channel receive-all siphon]]
@@ -58,10 +59,12 @@
        (wrap-aleph-handler livereload-handler))
 
   (GET "/livereload.js" []
-       (slurp (io/resource "livereload.js"))))
+       (slurp (io/resource "livereload.js")))
+
+  (route/not-found "Not found."))
 
 (def app (-> main-routes
-             (wrap-ring-handler)))
+             wrap-ring-handler))
 
 (defn stop-server! []
   (when-let [s @!server]
