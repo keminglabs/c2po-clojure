@@ -12,6 +12,6 @@
 
                                   ;;Vomnibus is a collection of sample data sets
                                   [com.keminglabs/vomnibus "0.3.2"]]}}
-  :resource-paths ["resources"]
+  
   :min-lein-version "2.0.0"
   :source-paths ["src/clj" "src/cljs"])
