@@ -95,13 +95,3 @@
 (render! (assoc scatterplot-spec
            :scales {:x (scale/linear :domain [0 10] :label "Weight" :ticks (range 11))
                     :y (scale/linear :domain [10 40] :label "Miles per gallon")}))
-
-
-
-
-(->
- {:data []
-  :geom (geom/point :radius 3)
-  :mapping {:x :wt
-            :y :mpg}}
- pprint)
