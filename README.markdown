@@ -24,7 +24,7 @@ Plot specifications are compiled directly to an SVG string, which is returned:
 ;;Additional calls to `render!` will automatically refresh the browser.
 ```
 
-See `examples/1-usage.clj` for a more detailed tutorial.
+Clone this repository and walk through `examples/1-usage.clj` for a more detailed tutorial.
 
 This is an *experimental* package; the package API, plot specification syntax, and remote server may change or disappear at any time.
 
