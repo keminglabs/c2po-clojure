@@ -18,13 +18,13 @@ Plot specifications are compiled directly to an SVG string, which is returned:
 (spit "rad_scatterplot.svg" (c2po scatterplot))
 
 ;;Alternatively, you can use the built-in livereload web server:
-(require '[c2po.livereload-server :refer [render!]])
+(require '[c2po.core :refer [render!]])
 (render! scatterplot)
 ;;which puts your plot at http://localhost:8987
 ;;Additional calls to `render!` will automatically refresh the browser.
 ```
 
-Clone this repository and walk through `examples/1-usage.clj` for a more detailed tutorial.
+Clone this repository, start a swank or nrepl server against `/project.clj`, and walk through `examples/1-usage.clj` for a more detailed tutorial.
 
 This is an *experimental* package; the package API, plot specification syntax, and remote server may change or disappear at any time.
 
@@ -35,4 +35,10 @@ Add to your `project.clj`:
 
 ```clojure
 [com.keminglabs/c2po "0.1.0-SNAPSHOT"]
+```
+
+If you don't want any of the livereload bits, you can use
+
+```clojure
+[com.keminglabs/c2po-core "0.1.0-SNAPSHOT"]
 ```

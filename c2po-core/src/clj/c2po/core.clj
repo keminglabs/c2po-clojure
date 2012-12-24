@@ -42,3 +42,15 @@
                                  :throw-entire-message? true}))
         (catch (contains? % :body) {body :body}
           (throw (Error. body)))))))
+
+(def render!
+  "Render c2po spec and display on livereload server."
+  (try
+    (require 'c2po-livereload.server)
+    (eval '(fn [& args]
+             (when-let [svg (apply c2po args)]
+               (c2po-livereload.server/display! svg))))
+    
+    (catch java.io.FileNotFoundException e
+      (fn [& args]
+        (throw (Error. "c2po-livereload.server not found on your classpath. Make sure it's listed in your project.clj dependency list."))))))

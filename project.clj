@@ -1,20 +1,8 @@
 (defproject com.keminglabs/c2po "0.1.0-SNAPSHOT"
-  :description "Free-to-use client for the C2PO grammar of graphics"
+  :description "Core c2po client"
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [clj-http "0.6.3" :exclusions [commons-codec]]
-                 [slingshot "0.10.3"]
-
-                 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                 ;;Can we factor out the below deps so that they can
-                 ;;be *optionally* sucked in downstream?
-                 
-                 ;;Bits for the livereload server
-                 [compojure "1.1.3" :exclusions [org.clojure/tools.macro]]
-                 [aleph "0.3.0-beta8" :exclusions [cheshire]]
-                 [hiccup "1.0.2"]
-
-                 ;;Vomnibus is a collection of sample data sets
-                 [com.keminglabs/vomnibus "0.3.2"]]
+                 [com.keminglabs/c2po-core "0.1.0-SNAPSHOT"]
+                 [com.keminglabs/c2po-livereload "0.1.0-SNAPSHOT"]]
 
   :min-lein-version "2.0.0"
   :source-paths ["src/clj" "src/cljs"])

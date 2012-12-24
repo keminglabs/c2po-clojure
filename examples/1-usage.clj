@@ -2,8 +2,7 @@
 
 (require
  ;;interfaces to the c2po compiler
- '[c2po.core :refer [c2po]]
- '[c2po.livereload-server :refer [render!]]
+ '[c2po.core :refer [c2po render!]]
 
  ;;pieces of the grammar of graphics
  '[c2po.geom :as geom]

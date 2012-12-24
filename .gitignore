@@ -7,3 +7,6 @@ pom.xml
 /checkouts
 /.env
 /target
+
+/c2po-core/target/
+/c2po-livereload/target/
